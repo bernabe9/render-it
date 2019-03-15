@@ -13,6 +13,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "jsdom": "^14.0.0",
     "puppeteer": "^1.12.2"
   },
   "devDependencies": {
