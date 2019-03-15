@@ -40,6 +40,7 @@ But you want to return the document HTML with the content (usually for SEO).
 - Zero config required in the client side.
 - Works with any server language.
 - Works with any JavaScript library or framework.
+- Render just what you need.
 
 Just create a task to generate the static pages!
 
