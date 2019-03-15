@@ -1,5 +1,5 @@
 # Render It :pencil:
-Crawl and render any JavaScript web app to create static sites ready for SEO
+Render any JavaScript content to create static sites ready for SEO.
 
 ## Motivation
 
