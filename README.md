@@ -5,7 +5,7 @@ Crawl and render any JavaScript web app to create static sites ready for SEO
 
 If you are here, you probably have a problem like this:
 
-Your server is returning a HTML struture without the content that JavaScript is rendering.
+Your server is returning a HTML struture without the content that JavaScript renders.
 
 ```html
 <!-- DOCUMENT HTML -->
