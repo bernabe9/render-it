@@ -35,6 +35,14 @@ But you want to return the document HTML with the content (usually for SEO).
 
 **Render It** allows you to generate all the static pages WITH the content. It returns the same HTML structure from the server but with the JavaScript content inside the placeholder.
 
+## Why is it awesome?
+- Zero config required in the server side.
+- Zero config required in the client side.
+- Works with any server language.
+- Works with any JavaScript library or framework.
+
+Just create a task to generate the static pages!
+
 ## Usage
 ```javascript
 import renderIt from 'render-it' // or const renderIt = require('render-it')
