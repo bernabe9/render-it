@@ -1,6 +1,14 @@
 # Render It :pencil:
 Render any JavaScript content to create static sites ready for SEO.
 
+```bash
+$ yarn add --dev render-it
+```
+or
+```bash
+$ npm install --save-dev render-it
+```
+
 ## Motivation
 
 If you are here, you probably have a problem like this:
