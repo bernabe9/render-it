@@ -61,9 +61,9 @@ renderIt('http://my-site.com', config)
 
 | Option  | Default | Description |
 | ------------- | ------------- | ------------- |
-| outputPath | output | path of the folder to store the generated static pages |
-| paths | ['/'] | url pathnames to render |
-| selector | #render-it | selector to render the JavaScript content |
+| outputPath | output | Path of the folder to store the generated static pages |
+| paths | ['/'] | Url pathnames to render |
+| selector | #render-it | Selector to render the JavaScript content |
 | headless | true | Force to use a non-headless browser to render the content |
 
 
