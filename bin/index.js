@@ -1,3 +1,5 @@
+#! /usr/bin/env node
+
 const chalk = require('chalk')
 const path = require('path')
 const fs = require('fs')
@@ -8,9 +10,9 @@ const { log } = console
 
 // constants
 const OUTPUT_FOLDER_NAME = 'output'
-const OUTPUT_FOLDER = path.resolve(__dirname, OUTPUT_FOLDER_NAME)
+const OUTPUT_FOLDER = path.resolve(process.cwd(), OUTPUT_FOLDER_NAME)
 const PATHS = [
-  '/',
+  '/articles/test-article-with-videos/preview',
 ]
 
 const createOutputFolder = () => {
@@ -45,7 +47,7 @@ const saveHTML = (html, pathname) =>
     if (!file) {
       file = 'index'
     }
-    file = file + '.html'
+    file = file.replace(/\//g, '_') + '.html'
     fs.writeFile(
       path.resolve(OUTPUT_FOLDER, file),
       html,
@@ -62,6 +64,21 @@ const saveHTML = (html, pathname) =>
 
 const renderPage = async (browser, path) => {
   const page = await browser.newPage()
+  await page.setRequestInterception(true);
+  page.on('request', request => {
+    const url = request.url();
+    request.continue();
+  });
+  page.on('requestfailed', request => {
+    const url = request.url();
+    console.log('request failed url:', url);
+  });
+  page.on('response', response => {
+    const request = response.request();
+    const url = request.url();
+    const status = response.status();
+    console.log('response url:', url, 'status:', status);
+  });
   await go(page, path)
   await page.waitFor(3000)
   const html = await page.content()
