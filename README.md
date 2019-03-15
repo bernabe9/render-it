@@ -1,4 +1,6 @@
 # Render It :pencil:
+[![NPM version](https://img.shields.io/npm/v/render-it.svg?style=flat)](https://npmjs.org/package/render-it)
+
 Render any JavaScript content to create static sites ready for SEO.
 
 ```bash
@@ -80,6 +82,7 @@ renderIt('http://my-site.com', config)
 | Feature  | Status |
 | ------------- | ------------- |
 | CLI  | In progress  |
+| Render meta tags  | Pending  |
 | Auto crawling  | Pending  |
 | Wait to render  | Pending  |
 | Auto render  | Pending  |
