@@ -33,7 +33,7 @@ But you want to return the document HTML with the content (usually for SEO).
 </html>
 ```
 
-**Render It** allows you to generate all the static pages WITH the content. It returns the same HTML structure from the server but with the javascript content inside the placeholder.
+**Render It** allows you to generate all the static pages WITH the content. It returns the same HTML structure from the server but with the JavaScript content inside the placeholder.
 
 ## Usage
 ```javascript
