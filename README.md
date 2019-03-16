@@ -54,6 +54,7 @@ But you want to return the document HTML with the content (usually for SEO).
 - Works with any JavaScript library or framework. (like React, VueJS, Angular)
 - Just render what you need.
 - Does not depend on Webpack.
+- Allows a production site URL to generate the static pages.
 
 ## Usage
 Create a Node task to generate the static pages.
