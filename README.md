@@ -17,7 +17,7 @@ $ npm install --save-dev render-it
 
 If you are here, you probably have a problem like this:
 
-Your server is returning a HTML struture without the content that JavaScript renders.
+Your server is returning a HTML structure without the content that JavaScript renders.
 
 ```html
 <!-- DOCUMENT HTML -->
@@ -31,7 +31,7 @@ Your server is returning a HTML struture without the content that JavaScript ren
 </html>
 ```
 
-But you want to return the document HTML with the content (usually for SEO).
+But you want to return the document HTML with the content (usually for SEO and SMO).
 
 ```html
 <!-- DOCUMENT HTML -->
