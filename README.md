@@ -55,28 +55,36 @@ But you want to return the document HTML with the content (usually for SEO).
 - Just render what you need.
 - Does not depend on Webpack.
 
-Just create a task to generate the static pages!
-
 ## Usage
+Create a Node task to generate the static pages.
+
 ```javascript
-import renderIt from 'render-it' // or const renderIt = require('render-it')
+// render-it.js
+
+const renderIt = require('render-it')
 
 const config = {
-  paths: ['/about', '/contact'],
+  url: 'http://localhost:3000',
+  paths: ['/', '/about', '/contact'],
   selector: '#root',
   outputPath: 'dist'
 }
 
-renderIt('http://my-site.com', config) 
+renderIt(config) 
 ```
+
+Then you can run it with: `node ./render-it.js`
+
+So, you can use this task in any environment with Node.
 
 ### Conguration
 
 | Option  | Default | Description |
 | ------------- | ------------- | ------------- |
-| outputPath | output | Path of the folder to store the generated static pages |
+| url | none | URL of the site to crawl. If this parameter isn't present, render-it will run it's own static server using the output folder. |
+| outputFolder | output | Path of the folder to store the generated static pages |
 | paths | ['/'] | Url pathnames to render |
-| selector | #render-it | Selector to render the JavaScript content |
+| selector | #root | Selector to render the JavaScript content |
 | headless | true | Force to use a non-headless browser to render the content |
 
 
