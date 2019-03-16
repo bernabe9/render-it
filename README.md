@@ -62,7 +62,7 @@ Just create a task to generate the static pages!
 import renderIt from 'render-it' // or const renderIt = require('render-it')
 
 const config = {
-  paths: ['/about', '/contact']
+  paths: ['/about', '/contact'],
   selector: '#root',
   outputPath: 'dist'
 }
