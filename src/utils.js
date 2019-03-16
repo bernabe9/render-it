@@ -4,9 +4,7 @@ const fs = require('fs')
 const { getConfig } = require('./config')
 
 const createOutputFolder = (outputFolder) => {
-  fs.mkdir(outputFolder, { recursive: true }, (err) => {
-    if (err) throw err;
-  });
+  fs.mkdir(outputFolder, { recursive: true });
 }
 
 module.exports.saveHTML = (html, pathname) =>
