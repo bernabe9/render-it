@@ -11,6 +11,8 @@ or
 $ npm install --save-dev render-it
 ```
 
+**Render it** uses [Headless Chrome](https://github.com/GoogleChrome/puppeteer) to render the JavaScript content and [JSDOM](https://github.com/jsdom/jsdom) to replace the content in the original HTML document.
+
 ## Motivation
 
 If you are here, you probably have a problem like this:
