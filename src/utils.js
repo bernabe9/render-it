@@ -3,21 +3,23 @@ const fs = require('fs')
 
 const { getConfig } = require('./config')
 
-const createOutputFolder = (outputFolder) => {
-  fs.mkdir(outputFolder, { recursive: true });
+const createOutputFolder = (outputFolderPath) => {
+  fs.mkdir(outputFolderPath, { recursive: true }, (err) => {
+    if (err) throw err;
+  });
 }
 
 module.exports.saveHTML = (html, pathname) =>
   new Promise((resolve, reject) => {
-    const outputFolder = path.resolve(process.cwd(), getConfig().outputPath)
-    createOutputFolder(outputFolder)
+    const outputFolderPath = path.resolve(process.cwd(), getConfig().outputFolder)
+    createOutputFolder(outputFolderPath)
     let file = pathname.substring(1, pathname.length)
     if (!file) {
       file = 'index'
     }
     file = file.replace(/\//g, '_') + '.html'
     fs.writeFile(
-      path.resolve(outputFolder, file),
+      path.resolve(outputFolderPath, file),
       html,
       (err) => {
         if (err) {
