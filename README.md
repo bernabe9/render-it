@@ -52,8 +52,8 @@ But you want to return the document HTML with the content (usually for SEO).
 - Zero config required in the client side.
 - Works with any server language.
 - Works with any JavaScript library or framework.
-- Render just what you need.
-- Does not depend on Webpack
+- Just render what you need.
+- Does not depend on Webpack.
 
 Just create a task to generate the static pages!
 
