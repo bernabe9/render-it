@@ -51,7 +51,7 @@ But you want to return the document HTML with the content (usually for SEO).
 - Zero config required in the server side.
 - Zero config required in the client side.
 - Works with any server language.
-- Works with any JavaScript library or framework.
+- Works with any JavaScript library or framework. (like React, VueJS, Angular)
 - Just render what you need.
 - Does not depend on Webpack.
 
