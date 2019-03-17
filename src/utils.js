@@ -3,16 +3,17 @@ const fs = require('fs')
 
 const { getConfig } = require('./config')
 
-const createOutputFolder = (outputFolderPath) => {
-  fs.mkdir(outputFolderPath, { recursive: true }, (err) => {
-    if (err) throw err;
-  });
-}
+const createOutputFolder = (outputFolderPath) =>
+  new Promise((resolve) => {
+    fs.mkdir(outputFolderPath, { recursive: true }, () => {
+      resolve()
+    });
+  })
 
 module.exports.saveHTML = (html, pathname) =>
-  new Promise((resolve, reject) => {
+  new Promise(async (resolve, reject) => {
     const outputFolderPath = path.resolve(process.cwd(), getConfig().outputFolder)
-    createOutputFolder(outputFolderPath)
+    await createOutputFolder(outputFolderPath)
     let file = pathname.substring(1, pathname.length)
     if (!file) {
       file = 'index'
