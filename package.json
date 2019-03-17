@@ -1,6 +1,6 @@
 {
   "name": "render-it",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Crawl and render any javascript web app to create static sites ready for SEO",
   "main": "src/index.js",
   "scripts": {
