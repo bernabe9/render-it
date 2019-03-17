@@ -1,8 +1,8 @@
 const renderIt = require('./src/index')
 
 const config = {
-  paths: ['/gordon-ramsays-list-of-essential-kitchen-tools'],
-  selector: '.contentful__hero-article-title'
+  url: 'http://example.com',
+  paths: ['/']
 }
 
-renderIt('https://masterclass.com/articles', config)
+renderIt(config)
