@@ -47,7 +47,7 @@ const processPage = async (browser, path) => {
   log(chalk.grey('Finding elements to render...'))
   let pageContent
   try {
-    pageContent = await page.content()
+    pageContent = await page.evaluate(() => document.body.innerHTML);
   } catch (err) {
     log(chalk.red('Failed getting client content'))
     log(err)
