@@ -25,14 +25,22 @@ const renderIt = async (userConfig) => {
     }
   }
 
-  const browser = await puppeteer.launch({ headless: config.headless })
+  let browser
+  if (config.browser) {
+    browser = config.browser
+  } else {
+    browser = await puppeteer.launch({ headless: config.headless })
+  }
   const promises = config.paths.map(path => processPage(browser, path))
-  await Promise.all(promises)
-  await browser.close()
+  const result = await Promise.all(promises)
+  if (!config.browser) {
+    await browser.close()
+  }
   if (server) {
     server.close()
   }
   log(chalk.green('Success!'))
+  return result
 }
 
 module.exports = renderIt

@@ -50,8 +50,11 @@ const processPage = async (browser, path) => {
   if (elements.length > 0) {
     log(chalk.grey('Rendering content...'))
     const HTML = await renderContent(serverDom, elements)
-    log(chalk.grey('Saving...'))
-    saveHTML(HTML, path)
+    if (getConfig().saveOutput) {
+      log(chalk.grey('Saving...'))
+      saveHTML(HTML, path)
+    }
+    return { path, HTML }
   } else {
     log(chalk.red('Nothing to render'))
   }
