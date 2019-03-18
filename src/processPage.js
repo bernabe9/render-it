@@ -45,7 +45,13 @@ const processPage = async (browser, path) => {
   log(chalk.grey('Getting server dom...'))
   const serverDom = new JSDOM(serverHTML)
   log(chalk.grey('Finding elements to render...'))
-  const pageContent = await page.content()
+  let pageContent
+  try {
+    pageContent = await page.content()
+  } catch (err) {
+    log(chalk.red('Failed getting client content'))
+    log(err)
+  }
   log(chalk.grey('Getting client dom...'))
   const clientDom = new JSDOM(pageContent)
   log(chalk.grey('Getting elements to render...'))
