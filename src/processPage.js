@@ -44,8 +44,11 @@ const processPage = async (browser, path) => {
   const { page, serverHTML } = await renderPage(browser, path)
   log(chalk.grey('Finding elements to render...'))
   const pageContent = await page.content()
+  log(chalk.grey('Getting server dom...'))
   const serverDom = new JSDOM(serverHTML)
+  log(chalk.grey('Getting client dom...'))
   const clientDom = new JSDOM(pageContent)
+  log(chalk.grey('Getting elements to render...'))
   const elements = await getElementsToRender(clientDom)
   if (elements.length > 0) {
     log(chalk.grey('Rendering content...'))
