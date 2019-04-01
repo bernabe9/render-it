@@ -68,7 +68,7 @@ const config = {
   url: 'http://localhost:3000',
   paths: ['/', '/about', '/contact'],
   selector: '#root',
-  outputPath: 'dist'
+  outputFolder: 'dist'
 }
 
 renderIt(config) 
