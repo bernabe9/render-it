@@ -12,7 +12,7 @@ module.exports = () =>
 
     app.use(express.static(path.join(process.cwd(), config.outputFolder)))
 
-    app.get('/', (req, res) => {
+    app.get('*', (req, res) => {
       res.sendFile(path.join(process.cwd(), config.outputFolder, 'index.html'))
     })
 
