@@ -52,6 +52,8 @@ const processPage = async (browser, path) => {
   });
   const serverDom = new JSDOM(serverHTML)
   const clientDom = new JSDOM(pageContent)
+  // save original HTML file
+  saveHTML(serverDom.serialize(), '/200')
   log(chalk.grey('Finding elements to render...'))
   const elements = await getElementsToRender(clientDom)
   if (elements.length > 0) {
