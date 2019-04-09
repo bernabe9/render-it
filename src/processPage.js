@@ -42,14 +42,7 @@ const processPage = async (browser, path) => {
   log(chalk.blue(`PAGE: ${pageUrl(path)}`))
   log(chalk.grey('Rendering page...'))
   const { page, serverHTML } = await renderPage(browser, path)
-  const pageContent = await page.evaluate(() => {
-    let retVal = '';
-    if (document.doctype)
-      retVal = new XMLSerializer().serializeToString(document.doctype);
-    if (document.documentElement)
-      retVal += document.documentElement.outerHTML;
-    return retVal;
-  });
+  const pageContent = await page.content()
   const serverDom = new JSDOM(serverHTML)
   const clientDom = new JSDOM(pageContent)
   // save original HTML file
