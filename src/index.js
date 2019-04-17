@@ -31,6 +31,7 @@ const renderIt = async userConfig => {
   } else {
     browser = await puppeteer.launch({ ...config.puppeteerConfig })
   }
+  log(`${chalk.blue('info:')} 🔗 URL: ${config.url}`)
   const paths = [...config.paths, '/200.html']
   const promises = paths.map(path => processPage(browser, path))
   const result = await Promise.all(promises)
