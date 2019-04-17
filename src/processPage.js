@@ -3,6 +3,7 @@ const { JSDOM } = require('jsdom')
 
 const { saveHTML, compareURLs } = require('./utils')
 const { getConfig } = require('./config')
+
 const { log } = console
 
 const pageUrl = path => `${getConfig().url}${path}`
@@ -29,8 +30,8 @@ const renderPage = async (browser, path) => {
 }
 
 const replaceNode = (dom, node, index) => {
-  var el = dom.window.document.querySelectorAll(getConfig().selector)[index]
-  el.parentNode.replaceChild(node, el);
+  const el = dom.window.document.querySelectorAll(getConfig().selector)[index]
+  el.parentNode.replaceChild(node, el)
 }
 
 const renderContent = async (serverDom, elements) => {
@@ -42,7 +43,7 @@ const renderContent = async (serverDom, elements) => {
 
 const processPage = async (browser, path) => {
   log(chalk.blue(`PAGE: ${pageUrl(path)}`))
-  log(chalk.grey('Rendering page...'))
+  log(chalk.grey('Rendering page... 📝'))
   const { page, serverHTML } = await renderPage(browser, path)
   const pageContent = await page.content()
   const serverDom = new JSDOM(serverHTML)
@@ -59,9 +60,9 @@ const processPage = async (browser, path) => {
       saveHTML(HTML, path)
     }
     return { path, HTML }
-  } else {
-    log(chalk.red('Nothing to render'))
   }
+  log(chalk.red('Nothing to render 🤷‍♂️'))
+  return { error: 'Nothing to render' }
 }
 
 module.exports = processPage

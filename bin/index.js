@@ -4,23 +4,21 @@ const chalk = require('chalk')
 const path = require('path')
 const fs = require('fs')
 const puppeteer = require('puppeteer')
-const input = require('./input')
 const { JSDOM } = require('jsdom')
+const input = require('./input')
 
 const { log } = console
 
 // constants
 const OUTPUT_FOLDER_NAME = 'output'
 const OUTPUT_FOLDER = path.resolve(process.cwd(), OUTPUT_FOLDER_NAME)
-const PATHS = [
-  '/articles/test-article-with-videos/preview',
-]
+const PATHS = ['/articles/test-article-with-videos/preview']
 const DEFAULT_SELECTOR = '#render-it'
 
 const createOutputFolder = () => {
-  fs.mkdir(OUTPUT_FOLDER, { recursive: true }, (err) => {
-    if (err) throw err;
-  });
+  fs.mkdir(OUTPUT_FOLDER, { recursive: true }, err => {
+    if (err) throw err
+  })
 }
 
 const pageUrl = path => `${process.env.URL}${path}`
@@ -51,18 +49,14 @@ const saveHTML = (html, pathname) =>
     if (!file) {
       file = 'index'
     }
-    file = file.replace(/\//g, '_') + '.html'
-    fs.writeFile(
-      path.resolve(OUTPUT_FOLDER, file),
-      html,
-      (err) => {
-        if (err) {
-          reject(err)
-        } else {
-          resolve()
-        }
+    file = `${file.replace(/\//g, '_')}.html`
+    fs.writeFile(path.resolve(OUTPUT_FOLDER, file), html, err => {
+      if (err) {
+        reject(err)
+      } else {
+        resolve()
       }
-    )
+    })
   })
 
 const getElementsToRender = async dom =>
@@ -111,14 +105,14 @@ const renderPage = async (browser, path) => {
     if (pageUrl(path) === response.url()) {
       serverHTML = await response.text()
     }
-  });
+  })
   await go(page, path)
   return { page, serverHTML }
 }
 
 const replaceNode = (dom, node, index) => {
-  var el = dom.window.document.querySelectorAll(DEFAULT_SELECTOR)[index]
-  el.parentNode.replaceChild(node, el);
+  const el = dom.window.document.querySelectorAll(DEFAULT_SELECTOR)[index]
+  el.parentNode.replaceChild(node, el)
 }
 
 const renderContent = async (serverDom, elements) => {

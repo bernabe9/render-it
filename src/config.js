@@ -2,7 +2,7 @@ const defaultConfig = require('./defaultConfig')
 
 let config = {}
 
-module.exports.setConfig = (userConfig) => {
+module.exports.setConfig = userConfig => {
   config = { ...defaultConfig, ...userConfig }
 }
 

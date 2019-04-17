@@ -5,5 +5,5 @@ module.exports = {
   paths: ['/'],
   selector: DEFAULT_SELECTOR,
   headless: true,
-  saveOutput: true,
+  saveOutput: true
 }

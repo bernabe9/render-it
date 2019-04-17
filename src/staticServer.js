@@ -16,11 +16,11 @@ module.exports = () =>
       res.sendFile(path.join(process.cwd(), config.outputFolder, 'index.html'))
     })
 
-    const server = app.listen(port, (err) => {
+    const server = app.listen(port, err => {
       if (err) {
         reject(err)
       } else {
-        console.log(chalk.blue(`==> Server listening on port ${port}\n`))
+        console.log(chalk.blue(`==> 🌎 Server listening on port ${port}\n`))
         resolve({ server, port })
       }
     })

@@ -7,7 +7,7 @@ const { setConfig, getConfig } = require('./config')
 
 const { log } = console
 
-const renderIt = async (userConfig) => {
+const renderIt = async userConfig => {
   setConfig({ ...userConfig })
   const config = getConfig()
   let server
@@ -16,8 +16,8 @@ const renderIt = async (userConfig) => {
     log(chalk.blue(`Running a static server in /${config.outputFolder}`))
     try {
       const staticServerData = await staticServer()
-      server = staticServerData.server
       const { port } = staticServerData
+      server = staticServerData.server
 
       setConfig({ ...config, url: `http://localhost:${port}` })
     } catch (err) {
