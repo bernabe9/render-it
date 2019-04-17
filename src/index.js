@@ -29,9 +29,10 @@ const renderIt = async userConfig => {
   if (config.browser) {
     browser = config.browser
   } else {
-    browser = await puppeteer.launch({ headless: config.headless })
+    browser = await puppeteer.launch({ ...config.puppeteerConfig })
   }
-  const promises = config.paths.map(path => processPage(browser, path))
+  const paths = [...config.paths, '/200.html']
+  const promises = paths.map(path => processPage(browser, path))
   const result = await Promise.all(promises)
   if (!config.browser) {
     await browser.close()
@@ -39,7 +40,7 @@ const renderIt = async userConfig => {
   if (server) {
     server.close()
   }
-  log(chalk.green('Success!'))
+  log(chalk.green('success! ✅'))
   return result
 }
 

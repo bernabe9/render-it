@@ -1,13 +1,12 @@
 const path = require('path')
+const mkdirp = require('mkdirp')
 const fs = require('fs')
 
 const { getConfig } = require('./config')
 
-const createOutputFolder = outputFolderPath =>
-  new Promise(resolve => {
-    fs.mkdir(outputFolderPath, { recursive: true }, () => {
-      resolve()
-    })
+const createFolder = folder =>
+  new Promise((resolve, reject) => {
+    mkdirp(folder, error => (error ? reject(error) : resolve()))
   })
 
 module.exports.saveHTML = (html, pathname) =>
@@ -16,13 +15,19 @@ module.exports.saveHTML = (html, pathname) =>
       process.cwd(),
       getConfig().outputFolder
     )
-    await createOutputFolder(outputFolderPath)
-    let file = pathname.substring(1, pathname.length)
-    if (!file) {
-      file = 'index'
+    const { dir, ext, name } = path.parse(pathname.replace(/\//g, path.sep))
+    let folder
+    let fileName
+    if (ext === '.html') {
+      folder = path.join(outputFolderPath, dir)
+      fileName = name
+    } else {
+      folder = path.join(outputFolderPath, pathname)
+      fileName = 'index'
     }
-    file = `${file.replace(/\//g, '_')}.html`
-    fs.writeFile(path.resolve(outputFolderPath, file), html, err => {
+    await createFolder(folder)
+    const file = `${fileName}.html`
+    fs.writeFile(path.resolve(folder, file), html, err => {
       if (err) {
         reject(err)
       } else {

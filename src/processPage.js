@@ -42,26 +42,32 @@ const renderContent = async (serverDom, elements) => {
 }
 
 const processPage = async (browser, path) => {
-  log(chalk.blue(`PAGE: ${pageUrl(path)}`))
-  log(chalk.grey('Rendering page... 📝'))
+  log(`${chalk.blue('info:')} 📝 Rendering page ${pageUrl(path)}`)
   const { page, serverHTML } = await renderPage(browser, path)
-  const pageContent = await page.content()
   const serverDom = new JSDOM(serverHTML)
+  if (path === '/200.html') {
+    // save original HTML file
+    saveHTML(serverDom.serialize(), path)
+    return { HTML: serverDom.serialize(), path }
+  }
+  const pageContent = await page.content()
   const clientDom = new JSDOM(pageContent)
-  // save original HTML file
-  saveHTML(serverDom.serialize(), '/200')
-  log(chalk.grey('Finding elements to render...'))
+  log(
+    `${chalk.blue('info:')} 🔍 Finding elements to render for page ${pageUrl(
+      path
+    )}`
+  )
   const elements = await getElementsToRender(clientDom)
   if (elements.length > 0) {
-    log(chalk.grey('Rendering content...'))
+    log(`${chalk.blue('info:')} ✏️  Rendering content on page ${pageUrl(path)}`)
     const HTML = await renderContent(serverDom, elements)
     if (getConfig().saveOutput) {
-      log(chalk.grey('Saving...'))
+      log(`${chalk.blue('info:')} 💾 Saving page ${pageUrl(path)}`)
       saveHTML(HTML, path)
     }
     return { path, HTML }
   }
-  log(chalk.red('Nothing to render 🤷‍♂️'))
+  log(`${chalk.yellow('warning:')} 🤷‍♂️  Nothing to render on ${pageUrl(path)}`)
   return { error: 'Nothing to render' }
 }
 

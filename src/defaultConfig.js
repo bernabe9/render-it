@@ -4,6 +4,8 @@ module.exports = {
   outputFolder: DEFAULT_OUTPUT_FOLDER,
   paths: ['/'],
   selector: DEFAULT_SELECTOR,
-  headless: true,
+  puppeteerConfig: {
+    headless: true
+  },
   saveOutput: true
 }
