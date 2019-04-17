@@ -18,7 +18,9 @@ const renderPage = async (browser, path) => {
   let serverHTML
   const page = await browser.newPage()
   page.on('response', async response => {
-    if (compareURLs(pageUrl(path), response.url()) && response.ok()) {
+    const headers = response.headers()
+    const isHTML = headers['content-type'].includes('text/html')
+    if (compareURLs(pageUrl(path), response.url()) && isHTML) {
       serverHTML = await response.text()
     }
   })
