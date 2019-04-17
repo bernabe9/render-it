@@ -81,12 +81,12 @@ So, you can use this task in any environment with Node.
 ### Conguration
 
 | Option  | Default | Description |
-| ------------- | ------------- | ------------- |
+| ------------- | -------------- | ------------- |
 | url | none | URL of the site to crawl. If this parameter isn't present, render-it will run it's own static server using the output folder. |
 | outputFolder | output | Path of the folder to store the generated static pages |
 | paths | ['/'] | Url pathnames to render |
 | selector | #root | Selector to render the JavaScript content |
-| headless | true | Force to use a non-headless browser to render the content |
+| puppeteerConfig | `{ headless: true }` | Force to use another options for puppeteer |
 
 
 ## Roadmap
