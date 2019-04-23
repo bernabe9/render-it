@@ -17,11 +17,17 @@ const getElementsToRender = async dom =>
 
 const renderPage = async (browser, path) => {
   let serverHTML
+  let tmpPath
   const page = await browser.newPage()
   page.on('response', async response => {
     const headers = response.headers()
     const isHTML = headers['content-type'].includes('text/html')
-    if (compareURLs(pageUrl(path), response.url()) && isHTML) {
+    const wasMovedTemporarily = response.status() === 302
+    if (isHTML && wasMovedTemporarily) {
+      tmpPath = headers.location
+      return
+    }
+    if (compareURLs(pageUrl(tmpPath || path), response.url()) && isHTML) {
       serverHTML = await response.text()
     }
   })
@@ -44,6 +50,14 @@ const renderContent = async (serverDom, elements) => {
 const processPage = async (browser, path) => {
   log(`${chalk.blue('info:')} 📝 Rendering page ${path}`)
   const { page, serverHTML } = await renderPage(browser, path)
+  if (!serverHTML) {
+    log(
+      `${chalk.yellow(
+        'warning:'
+      )} Couldn't fetch HTML response from server for page ${path}`
+    )
+    return { error: 'Fetch HTML response error' }
+  }
   const serverDom = new JSDOM(serverHTML)
   if (path === '/200.html') {
     // save original HTML file
